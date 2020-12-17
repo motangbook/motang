@@ -12,10 +12,12 @@
     <description>redis配置starter</description>
     <artifactId>book-common-redis-starter</artifactId>
    <dependencies>
+       <!--spring boot 2.0以后默认使用lettuce-->
        <dependency>
            <groupId>org.springframework.boot</groupId>
            <artifactId>spring-boot-starter-data-redis</artifactId>
        </dependency>
+       <!--lettuce 依赖commons-pool-->
        <dependency>
            <groupId>org.apache.commons</groupId>
            <artifactId>commons-pool2</artifactId>

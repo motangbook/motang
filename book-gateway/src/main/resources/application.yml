@@ -1,0 +1,43 @@
+server:
+  port: 8881
+
+
+spring:
+  application:
+    name: book-gateway
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 101.132.105.134:8848
+    gateway:
+      routes:
+        - id: book-admin
+          uri: lb://book-admin
+          predicates:
+            - Path=/path/**
+
+        - id: book-auth
+          uri: lb://book-auth
+          predicates:
+            - Path=/auth/**
+
+        - id: book-crawl
+          uri: lb://book-crawl
+          predicates:
+            - Path=/crawl/**
+
+        - id: book-search
+          uri: lb://book-search
+          predicates:
+            - Path=/search/**
+
+        - id: book-upload
+          uri: lb://book-upload
+          predicates:
+            - Path=/upload/**
+
+        - id: book-portal
+          uri: lb://book-portal
+          predicates:
+            - Path=/portal/**
