@@ -1,12 +1,12 @@
 server:
-  port: 8881
+  port: 8883
   servlet:
-    context-path: /portal
+    context-path: /auth
 
 
 spring:
   application:
-    name: book-portal
+    name: book-auth
 
   cloud:
     nacos:
@@ -73,7 +73,7 @@ spring:
 
 logging:
   level:
-    com.motang.portal: debug
+    com.motang.auth: debug
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/*.xml
@@ -86,13 +86,5 @@ mybatis-plus:
 
 book:
   swagger:
-    enable: true
-    basePackage: com.motang.portal.controller
-    title: 墨唐书城API接口文档
-    description: 墨唐书城API接口文档-前台门户接口
-    name: liuhu
-    url: https://github.com/motangbook/motang.git
-    email: 1649471814@qq.com
-    license:
-    licenseUrl:
-    version: 1.0
+    enable: false
+
