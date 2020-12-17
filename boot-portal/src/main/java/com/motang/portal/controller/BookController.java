@@ -2,6 +2,7 @@ package com.motang.portal.controller;
 
 
 
+import com.motang.common.core.entity.Book;
 import com.motang.portal.service.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,11 @@ public class BookController {
 
     @Autowired
     private IBookService bookService;
+
+    @GetMapping
+    public Book book(){
+        return bookService.selectByBookName("武道神尊");
+    }
 
 //    @Autowired
 //    private MinioClient minioClient;

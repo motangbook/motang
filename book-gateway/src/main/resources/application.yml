@@ -1,5 +1,5 @@
 server:
-  port: 8881
+  port: 8882
 
 
 spring:
@@ -10,6 +10,7 @@ spring:
     nacos:
       discovery:
         server-addr: 101.132.105.134:8848
+
     gateway:
       routes:
         - id: book-admin

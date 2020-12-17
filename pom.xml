@@ -21,6 +21,8 @@
         <module>book-common/book-common-doc-starter</module>
         <module>book-upload</module>
         <module>book-crawl</module>
+        <module>book-generatorr</module>
+        <module>book-bus</module>
     </modules>
 
     <properties>
