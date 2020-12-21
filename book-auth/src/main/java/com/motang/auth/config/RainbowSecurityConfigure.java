@@ -1,9 +1,10 @@
-package com.motang.auth;
+package com.motang.auth.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -28,5 +29,21 @@ public class RainbowSecurityConfigure extends WebSecurityConfigurerAdapter {
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.formLogin().and()
+                .requestMatchers()
+                .antMatchers("/**")
+                .and()
+                .authorizeRequests()
+                .antMatchers("/auth/social/**")
+                .permitAll()
+                .antMatchers("/oauth/**")
+                .permitAll()
+                .antMatchers("/*")
+                .authenticated();
+
     }
 }
