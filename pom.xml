@@ -5,24 +5,26 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.motang</groupId>
-    <artifactId>book</artifactId>
+    <artifactId>motang</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>book-admin</module>
-        <module>book-gateway</module>
-        <module>book-auth</module>
-        <module>book-apm</module>
-        <module>book-search</module>
-        <module>book-common</module>
-        <module>boot-portal</module>
-        <module>book-common/book-common-core</module>
-        <module>book-common/book-common-redis-starter</module>
-        <module>book-common/book-common-doc-starter</module>
-        <module>book-upload</module>
-        <module>book-crawl</module>
-        <module>book-generatorr</module>
-        <module>book-bus</module>
+        <module>motang-admin</module>
+        <module>motang-gateway</module>
+        <module>motang-auth</module>
+        <module>motang-apm</module>
+        <module>motang-search</module>
+        <module>motang-common</module>
+        <module>motang-portal</module>
+        <module>motang-common/motang-common-core</module>
+        <module>motang-common/motang-common-redis-starter</module>
+        <module>motang-common/motang-common-doc-starter</module>
+        <module>motang-common/motang-common-encrypt-starter</module>
+        <module>motang-common/motang-common-datasource-starter</module>
+        <module>motang-upload</module>
+        <module>motang-crawl</module>
+        <module>motang-generator</module>
+        <module>motang-bus</module>
     </modules>
 
     <properties>

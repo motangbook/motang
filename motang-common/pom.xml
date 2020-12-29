@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>book</artifactId>
+        <artifactId>motang</artifactId>
         <groupId>org.motang</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -12,11 +12,12 @@
     <packaging>pom</packaging>
     <description>通用服务</description>
     <modules>
-        <module>book-common-datasource-starter</module>
-        <module>book-common-redis-starter</module>
-        <module>book-common-core</module>
-        <module>book-common-doc-starter</module>
+        <module>motang-common-datasource-starter</module>
+        <module>motang-common-redis-starter</module>
+        <module>motang-common-core</module>
+        <module>motang-common-doc-starter</module>
+        <module>motang-common-encrypt-starter</module>
     </modules>
-    <artifactId>book-common</artifactId>
+    <artifactId>motang-common</artifactId>
 
 </project>
