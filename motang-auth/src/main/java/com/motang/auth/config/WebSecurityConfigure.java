@@ -8,9 +8,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
@@ -24,6 +27,12 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private ValidateCaptchaFilter validateCaptchaFilter;
+
+    @Autowired
+    private AuthUserDetailService userDetailService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /**
      * @Description oauth2.0密码模式认证器
@@ -50,5 +59,17 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .anyRequest()
                 .authenticated();
+    }
+
+    /**
+     * @Description 指定校验类 和校验密码
+     * @author liuhu
+     * @param auth
+     * @date 2020/12/31 16:40
+     * @return void
+     */
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder);
     }
 }

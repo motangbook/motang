@@ -1,5 +1,6 @@
 package com.motang.auth.config;
 
+import com.motang.auth.translator.CloudWebResponseExceptionTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,6 +45,9 @@ public class AuthorizationServerConfigurer extends AuthorizationServerConfigurer
     @Autowired
     private AuthClientDetailsService authClientDetailsService;
 
+    @Autowired
+    private CloudWebResponseExceptionTranslator exceptionTranslator;
+
     /**
      * @description  客户端信息配置
      * @author liuhu
@@ -67,7 +71,8 @@ public class AuthorizationServerConfigurer extends AuthorizationServerConfigurer
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.userDetailsService(authUserDetailService)
                 .tokenStore(tokenStore())
-                .authenticationManager(authenticationManager);
+                .authenticationManager(authenticationManager)
+                .exceptionTranslator(exceptionTranslator);;
     }
 
     /**

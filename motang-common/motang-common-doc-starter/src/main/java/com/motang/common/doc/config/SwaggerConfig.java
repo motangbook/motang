@@ -26,13 +26,15 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableConfigurationProperties(SwaggerProperties.class)
 public class SwaggerConfig {
 
+    private static final String FULL_PATH = "/";
+
     @Autowired
     private SwaggerProperties swaggerProperties;
 
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .pathMapping("/")
+                .pathMapping(FULL_PATH)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(swaggerProperties.getBasePackage()))
                 .paths(PathSelectors.any())
