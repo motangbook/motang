@@ -1,4 +1,4 @@
-package com.motang.common.core.entity;
+package com.motang.admin.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

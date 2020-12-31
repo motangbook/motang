@@ -2,7 +2,7 @@ package com.motang.portal.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.motang.common.core.commonenum.WrapperEnum;
-import com.motang.common.core.entity.BookChapter;
+import com.motang.admin.entity.BookChapter;
 import com.motang.portal.exception.PortalException;
 import com.motang.portal.mapper.BookChapterMapper;
 import com.motang.portal.service.IBookChapterService;

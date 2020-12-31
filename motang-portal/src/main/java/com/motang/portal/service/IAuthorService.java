@@ -1,7 +1,7 @@
 package com.motang.portal.service;
 
 
-import com.motang.common.core.entity.Author;
+import com.motang.admin.entity.Author;
 
 /**
  * @Description 作者表 服务类

@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
     <description>监控服务</description>
-    <artifactId>book-apm</artifactId>
+    <artifactId>motang-apm</artifactId>
 
 
 </project>

@@ -22,9 +22,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @EnableSwagger2
 @Configuration
-@ConditionalOnProperty(value = "book.swagger.enable", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(value = "motang.swagger.enable", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties(SwaggerProperties.class)
 public class SwaggerConfig {
+
     @Autowired
     private SwaggerProperties swaggerProperties;
 

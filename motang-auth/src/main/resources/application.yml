@@ -77,14 +77,16 @@ logging:
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/*.xml
-  type-aliases-package: com.motang.common.core.entity
+  type-aliases-package: com.motang.admin.entity
   configuration:
     map-underscore-to-camel-case: true
   global-config:
     banner: false
 
 
-book:
+motang:
   swagger:
     enable: false
+  security:
+    enable: true
 

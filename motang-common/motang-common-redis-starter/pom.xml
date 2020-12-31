@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <description>redis配置starter</description>
-    <artifactId>book-common-redis-starter</artifactId>
+    <artifactId>motang-common-redis-starter</artifactId>
    <dependencies>
        <!--spring boot 2.0以后默认使用lettuce-->
        <dependency>

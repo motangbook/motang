@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>book-common-datasource-starter</artifactId>
+    <artifactId>motang-common-datasource-starter</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -22,31 +22,12 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.motang</groupId>
-            <artifactId>book-common-core</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.alibaba.cloud</groupId>
-                    <artifactId>spring-cloud-alibaba-nacos-discovery</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework.cloud</groupId>
-                    <artifactId>spring-cloud-starter-openfeign</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework.cloud</groupId>
-                    <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.springfox</groupId>
-                    <artifactId>springfox-swagger2</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.springfox</groupId>
-                    <artifactId>springfox-swagger-ui</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>

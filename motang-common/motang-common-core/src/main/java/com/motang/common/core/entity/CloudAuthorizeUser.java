@@ -1,4 +1,4 @@
-package com.motang.auth.entity;
+package com.motang.common.core.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,7 +16,7 @@ import java.util.Date;
 @Data
 @SuppressWarnings("all")
 @EqualsAndHashCode(callSuper = true)
-public class AuthorizeUser extends User {
+public class CloudAuthorizeUser extends User {
 
     private Long id;
 
@@ -44,11 +44,11 @@ public class AuthorizeUser extends User {
 
     private String deptIds;
 
-    public AuthorizeUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public CloudAuthorizeUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
     }
 
-    public AuthorizeUser(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
+    public CloudAuthorizeUser(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
     }
 

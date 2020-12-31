@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
  * @author liuhu
  * @Date 2020/12/16 21:29
  */
-@ConfigurationProperties(prefix = "book.swagger")
+@ConfigurationProperties(prefix = "motang.swagger")
 public class SwaggerProperties {
     /**
      * 是否开启doc功能

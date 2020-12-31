@@ -12,4 +12,9 @@ public interface CommonConstants {
 
     /**本地文件存储地址*/
     String LOCAL_FILE_STORE = "D:\\lh\\image";
+
+    /**
+     * OAUTH2 令牌头
+     */
+    String OAUTH2_TOKEN_TYPE = "bearer";
 }

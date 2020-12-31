@@ -1,7 +1,7 @@
 package com.motang.portal.service.impl;
 
 
-import com.motang.common.core.entity.Attachment;
+import com.motang.admin.entity.Attachment;
 import com.motang.portal.exception.PortalException;
 import com.motang.portal.mapper.AttachmentMapper;
 import com.motang.portal.service.IAttachmentService;

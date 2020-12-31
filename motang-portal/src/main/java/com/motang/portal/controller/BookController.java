@@ -2,7 +2,7 @@ package com.motang.portal.controller;
 
 
 
-import com.motang.common.core.entity.Book;
+import com.motang.admin.entity.Book;
 import com.motang.portal.service.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

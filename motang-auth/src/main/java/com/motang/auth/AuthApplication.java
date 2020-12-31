@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @MapperScan("com.motang.auth.mapper")
+//@EnableCloudResourceServer
 public class AuthApplication {
     public static void main(String[] args) {
         SpringApplication.run(AuthApplication.class,args);

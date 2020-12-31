@@ -2,7 +2,7 @@ package com.motang.portal.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.motang.common.core.entity.BookContent;
+import com.motang.admin.entity.BookContent;
 import org.springframework.stereotype.Repository;
 
 /**

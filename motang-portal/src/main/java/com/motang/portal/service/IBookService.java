@@ -1,7 +1,6 @@
 package com.motang.portal.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.motang.common.core.entity.Book;
+import com.motang.admin.entity.Book;
 
 import java.util.List;
 

@@ -11,7 +11,7 @@
     <description>后台管理</description>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>book-admin</artifactId>
+    <artifactId>motang-admin</artifactId>
 
 
 </project>

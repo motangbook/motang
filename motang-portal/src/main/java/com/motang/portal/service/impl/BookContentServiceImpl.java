@@ -1,7 +1,7 @@
 package com.motang.portal.service.impl;
 
 
-import com.motang.common.core.entity.BookContent;
+import com.motang.admin.entity.BookContent;
 import com.motang.portal.exception.PortalException;
 import com.motang.portal.mapper.BookContentMapper;
 import com.motang.portal.service.IBookContentService;

@@ -1,12 +1,17 @@
 package com.motang.auth.config;
 
+import com.motang.auth.constant.AuthConstants;
+import com.motang.auth.filter.ValidateCaptchaFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  *  @Description  security web层配置
@@ -15,14 +20,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  */
 @Order(2)
 @EnableWebSecurity
-@RequiredArgsConstructor
-public class RainbowSecurityConfigure extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private ValidateCaptchaFilter validateCaptchaFilter;
 
     /**
      * @Description oauth2.0密码模式认证器
      * @author liuhu
      * @createTime 2020-05-13 09:11:11
-     * @param
      * @return org.springframework.security.authentication.AuthenticationManager
      */
     @Bean
@@ -33,17 +39,16 @@ public class RainbowSecurityConfigure extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin().and()
+        // validateCaptchaFilter 验证码过滤器在登录之前校验
+        http.addFilterBefore(validateCaptchaFilter,UsernamePasswordAuthenticationFilter.class).formLogin()
+                .and()
                 .requestMatchers()
-                .antMatchers("/**")
+                .antMatchers(AuthConstants.AllUrl)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/social/**")
+                .antMatchers(AuthConstants.OAUTH_URL)
                 .permitAll()
-                .antMatchers("/oauth/**")
-                .permitAll()
-                .antMatchers("/*")
+                .anyRequest()
                 .authenticated();
-
     }
 }

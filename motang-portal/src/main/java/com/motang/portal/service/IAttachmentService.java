@@ -1,7 +1,7 @@
 package com.motang.portal.service;
 
 
-import com.motang.common.core.entity.Attachment;
+import com.motang.admin.entity.Attachment;
 
 /**
  * @description 附件表 服务类

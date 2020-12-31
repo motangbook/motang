@@ -1,7 +1,7 @@
 package com.motang.auth.config;
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.motang.auth.entity.AuthorizeUser;
+import com.motang.common.core.entity.CloudAuthorizeUser;
 import com.motang.auth.entity.SystemUser;
 import com.motang.auth.service.ISystemMenuService;
 import com.motang.auth.service.ISystemUserService;
@@ -49,7 +49,7 @@ public class AuthUserDetailService implements UserDetailsService {
                 grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList(permissionStr);
             }
             // 构建返回用户信息
-            AuthorizeUser authorizeUser = new AuthorizeUser
+            CloudAuthorizeUser authorizeUser = new CloudAuthorizeUser
                     (systemUser.getUsername(),systemUser.getPassword(), true, true, true, notLocked,grantedAuthorities);
          
             BeanUtils.copyProperties(systemUser,authorizeUser);

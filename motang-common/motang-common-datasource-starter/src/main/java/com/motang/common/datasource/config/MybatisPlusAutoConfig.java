@@ -1,7 +1,7 @@
 package com.motang.common.datasource.config;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
-import com.motang.common.datasource.handler.BookMetaObjectHandler;
+import com.motang.common.datasource.handler.CloudMetaObjectHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 /**
@@ -30,7 +30,7 @@ public class MybatisPlusAutoConfig {
      * @return com.motang.common.datasource.handler.BookMetaObjectHandler
      */
    @Bean
-    public BookMetaObjectHandler bookMetaObjectHandler(){
-        return new BookMetaObjectHandler();
+    public CloudMetaObjectHandler bookMetaObjectHandler(){
+        return new CloudMetaObjectHandler();
    }
 }

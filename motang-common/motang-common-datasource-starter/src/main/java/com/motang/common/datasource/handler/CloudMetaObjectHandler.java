@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * @Date 2020/12/15 16:36
  */
 @Slf4j
-public class BookMetaObjectHandler implements MetaObjectHandler {
+public class CloudMetaObjectHandler implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {

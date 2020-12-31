@@ -1,7 +1,7 @@
 package com.motang.portal.service;
 
 
-import com.motang.common.core.entity.BookChapter;
+import com.motang.admin.entity.BookChapter;
 
 /**
  * @Description 章节表 服务类

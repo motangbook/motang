@@ -17,6 +17,7 @@
         <module>motang-common-core</module>
         <module>motang-common-doc-starter</module>
         <module>motang-common-encrypt-starter</module>
+        <module>motang-common-security-starter</module>
     </modules>
     <artifactId>motang-common</artifactId>
 

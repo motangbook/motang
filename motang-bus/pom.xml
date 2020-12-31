@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <description>消息服务</description>
-    <artifactId>book-bus</artifactId>
+    <artifactId>motang-bus</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

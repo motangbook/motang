@@ -15,22 +15,22 @@
     <dependencies>
         <dependency>
             <groupId>org.motang</groupId>
-            <artifactId>book-common-core</artifactId>
+            <artifactId>motang-common-core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.motang</groupId>
-            <artifactId>book-common-redis-starter</artifactId>
+            <artifactId>motang-common-redis-starter</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.motang</groupId>
-            <artifactId>book-common-doc-starter</artifactId>
+            <artifactId>motang-common-doc-starter</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.motang</groupId>
-            <artifactId>book-common-datasource-starter</artifactId>
+            <artifactId>motang-common-datasource-starter</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

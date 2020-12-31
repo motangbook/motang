@@ -16,11 +16,6 @@
         <module>motang-search</module>
         <module>motang-common</module>
         <module>motang-portal</module>
-        <module>motang-common/motang-common-core</module>
-        <module>motang-common/motang-common-redis-starter</module>
-        <module>motang-common/motang-common-doc-starter</module>
-        <module>motang-common/motang-common-encrypt-starter</module>
-        <module>motang-common/motang-common-datasource-starter</module>
         <module>motang-upload</module>
         <module>motang-crawl</module>
         <module>motang-generator</module>
