@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class BaseExceptionHandler {
 
     /**
-     * @description 处理系统异常
+     * @description 处理整个系统异常
      * @author liuhu
      * @param e
      * @date 2020/12/17 14:11
      * @return org.springframework.http.ResponseEntity
      */
     @ExceptionHandler(BaseException.class)
-    public ResponseEntity handlerBaseException(BaseException e){
+    public ResponseEntity<String> handlerBaseException(BaseException e){
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
 
@@ -31,7 +31,7 @@ public class BaseExceptionHandler {
      * @return org.springframework.http.ResponseEntity
      */
     @ExceptionHandler(Exception.class)
-    public ResponseEntity handlerException(Exception e){
+    public ResponseEntity<String> handlerException(Exception e){
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("系统异常，请联系管理员");
     }
 }

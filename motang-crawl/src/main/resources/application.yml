@@ -1,18 +1,12 @@
 server:
-  port: 8883
+  port: 8884
   servlet:
-    context-path: /auth
+    context-path: /crawl
 
 
 spring:
   application:
-    name: motang-auth
-
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 101.132.105.134:8848
-
+    name: motang-crawl
 
   redis:
     port: 6379
@@ -71,27 +65,6 @@ spring:
         login-password: admin
         enabled: true
 
-logging:
-  level:
-    com.motang.auth: debug
-
-mybatis-plus:
-  mapper-locations: classpath:/mapper/*.xml
-  type-aliases-package: com.motang.admin.entity
-  configuration:
-    map-underscore-to-camel-case: true
-  global-config:
-    banner: false
-
-
-motang:
-  swagger:
-    enable: false
-  security:
-    enable: true
-    anonUrls: /captcha/**
-
-
 # 为了让feign获得token
 hystrix:
   shareSecurityContext: true
@@ -102,3 +75,23 @@ security:
     resource:
       id: ${spring.application.name}
       user-info-uri: http://localhost:8882/auth/user
+
+logging:
+  level:
+    com.motang.crawl: debug
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.motang.crawl.entity
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    banner: false
+
+
+motang:
+  swagger:
+    enable: false
+#  security:
+#    enable: true
+#    anonUrls: /captcha/**

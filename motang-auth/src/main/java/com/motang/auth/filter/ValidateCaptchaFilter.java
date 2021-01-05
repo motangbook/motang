@@ -7,12 +7,14 @@ import com.motang.common.core.utils.CommonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import javax.security.auth.message.AuthException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +25,7 @@ import java.io.IOException;
  *  @author liuhu
  *  @Date 2020/12/29 10:56
  */
-@Component
+@Configuration
 @Slf4j
 public class ValidateCaptchaFilter extends OncePerRequestFilter {
 
@@ -39,13 +41,15 @@ public class ValidateCaptchaFilter extends OncePerRequestFilter {
         // 2.校验验证码是否正确
             try {
                 validateCode(request);
+                filterChain.doFilter(request, response);
             } catch (Exception e) {
                 CommonResponse commonResponse = new CommonResponse();
                 CommonUtil.makeFailureResponse(response, commonResponse.message(e.getMessage()));
                 log.error(e.getMessage(), e);
             }
+        }else {
+            filterChain.doFilter(request, response);
         }
-        filterChain.doFilter(request, response);
 
     }
 

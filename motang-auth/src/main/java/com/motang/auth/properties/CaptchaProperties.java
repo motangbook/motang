@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component
-@ConfigurationProperties(prefix = "rainbow.captcha")
+@ConfigurationProperties(prefix = "motang.captcha")
 @PropertySource("classpath:captcha.properties")
 public class CaptchaProperties {
     /**图片宽度*/
