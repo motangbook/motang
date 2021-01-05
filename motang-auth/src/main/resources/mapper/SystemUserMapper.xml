@@ -3,7 +3,7 @@
 <mapper namespace="com.motang.auth.mapper.SystemUserMapper">
     <!-- 基础返回结果集 -->
     <resultMap id="SystemUserMap" type="com.motang.auth.entity.SystemUser">
-              <id property="id" column="id"/>
+              <id property="userId" column="id"/>
              <result property="username" column="username"/>
              <result property="password" column="password"/>
              <result property="realName" column="real_name"/>
@@ -20,7 +20,7 @@
              <result property="status" column="status"/>
              <result property="locked" column="locked"/>
              <result property="createTime" column="create_time"/>
-             <result property="updateTimee" column="update_timee"/>
+             <result property="updateTime" column="update_time"/>
              <result property="lastLoginTime" column="last_login_time"/>
              <result property="ssex" column="ssex"/>
              <result property="isTab" column="is_tab"/>

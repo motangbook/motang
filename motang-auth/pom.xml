@@ -39,11 +39,11 @@
             <artifactId>motang-common-security-starter</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!--验证码-->
         <dependency>
             <groupId>com.github.whvcse</groupId>
             <artifactId>easy-captcha</artifactId>
             <version>1.6.2</version>
         </dependency>
-
     </dependencies>
 </project>

@@ -32,7 +32,7 @@
                     UPDATE_TIME
     </sql>
 
-    <select id="selectPermissionByUsername" parameterType="string" resultMap="SystemMenuMap">
+    <select id="selectPermissionByUsername" parameterType="string" resultType="String">
         select distinct m.perms
         from system_role r
                  left join system_user_role ur on (r.role_id = ur.role_id)

@@ -27,9 +27,9 @@ public class SystemUser implements Serializable{
     public static final Integer STATUS_VALID = 1;
 
 
-     @ApiModelProperty(name = "id",value = "用户ID")
-     @TableId(value = "id", type = IdType.AUTO)
-     private Long id;
+     @ApiModelProperty(name = "userId",value = "用户ID")
+     @TableId(value = "USER_ID", type = IdType.AUTO)
+     private Long userId;
 
      @ApiModelProperty(name = "username",value = "用户名")
      @TableField("username")

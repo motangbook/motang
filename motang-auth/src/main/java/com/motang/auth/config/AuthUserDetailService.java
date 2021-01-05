@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
  * @author liuhu
  * @Date 2020/12/21 20:51
  */
-@Component
+@Service
 public class AuthUserDetailService implements UserDetailsService {
 
     @Autowired
@@ -45,7 +46,7 @@ public class AuthUserDetailService implements UserDetailsService {
             // 权限集合
             List<GrantedAuthority> grantedAuthorities = AuthorityUtils.NO_AUTHORITIES;
             if(!CollectionUtils.isEmpty(permission)){
-                String permissionStr = permission.stream().collect(Collectors.joining(StringPool.COMMA));
+                String permissionStr = String.join(StringPool.COMMA, permission);
                 grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList(permissionStr);
             }
             // 构建返回用户信息

@@ -4,6 +4,8 @@ package com.motang.common.security.utils;
 import com.motang.common.core.entity.CloudAuthorizeUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 /**
@@ -48,6 +50,10 @@ public class AccountUtil {
         return (OAuth2Authentication) authentication;
     }
 
+    public static void main(String[] args) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        System.out.println(passwordEncoder.encode("123456"));
+    }
 
 
 }

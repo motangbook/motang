@@ -4,6 +4,7 @@ import com.motang.auth.translator.CloudWebResponseExceptionTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -13,6 +14,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
@@ -72,7 +74,7 @@ public class AuthorizationServerConfigurer extends AuthorizationServerConfigurer
         endpoints.userDetailsService(authUserDetailService)
                 .tokenStore(tokenStore())
                 .authenticationManager(authenticationManager)
-                .exceptionTranslator(exceptionTranslator);;
+                .exceptionTranslator(exceptionTranslator);
     }
 
     /**
@@ -87,5 +89,23 @@ public class AuthorizationServerConfigurer extends AuthorizationServerConfigurer
         // 解决每次生成的 token都一样的问题
         redisTokenStore.setAuthenticationKeyGenerator(oAuth2Authentication -> UUID.randomUUID().toString());
         return redisTokenStore;
+    }
+
+
+    /**
+     * @Description 默认token配置
+     * @author liuhu
+     * @createTime 2020-05-12 16:15:25
+     * @param
+     * @return org.springframework.security.oauth2.provider.token.DefaultTokenServices
+     */
+    @Bean
+    @Primary
+    public DefaultTokenServices defaultTokenServices() {
+        DefaultTokenServices tokenServices = new DefaultTokenServices();
+        tokenServices.setTokenStore(tokenStore());
+        tokenServices.setSupportRefreshToken(true);
+        tokenServices.setClientDetailsService(authClientDetailsService);
+        return tokenServices;
     }
 }

@@ -1,6 +1,7 @@
 package com.motang.auth.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.motang.auth.entity.SystemUser;
 import com.motang.auth.exception.AuthorizeException;
 import com.motang.auth.mapper.SystemUserMapper;
@@ -24,7 +25,7 @@ public class SystemUserServiceImpl  implements ISystemUserService {
     public SystemUser selectByUsername(String username) {
         SystemUser systemUser = null;
         try {
-            systemUser =  systemUserMapper.selectById(username);
+            systemUser =  systemUserMapper.selectOne(new QueryWrapper<SystemUser>().eq("USERNAME",username));
         }catch (Exception e){
             log.error("通过username获取用户失败",e);
             throw new AuthorizeException("通过username获取用户失败！");

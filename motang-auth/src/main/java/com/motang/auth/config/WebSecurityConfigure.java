@@ -52,12 +52,10 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(validateCaptchaFilter,UsernamePasswordAuthenticationFilter.class).formLogin()
                 .and()
                 .requestMatchers()
-                .antMatchers(AuthConstants.AllUrl)
+                .antMatchers(AuthConstants.OAUTH_URL)
                 .and()
                 .authorizeRequests()
                 .antMatchers(AuthConstants.OAUTH_URL)
-                .permitAll()
-                .anyRequest()
                 .authenticated();
     }
 
