@@ -29,6 +29,19 @@ public class CrawlController {
     }
 
     public static void main(String[] args) {
+        String baseUrl = "https://www.duquanben.com/";
+        String indexHtml = HttpClientUtil.httpGet(baseUrl);
+        Document indexDocument = Jsoup.parse(indexHtml);
+        Elements categoryElements = indexDocument.select("#subnav > div > div");
+        for (Element categoryElement : categoryElements) {
+            String categoryHref = categoryElement.select("a").attr("href");
+            String categoryName = categoryElement.select("a").text();
+            String categoryHtml = HttpClientUtil.httpGet(baseUrl+categoryHref);
+            Document categoryDocument = Jsoup.parse(categoryHtml);
+        }
+    }
+
+    public void ss() {
         String baseUrl = "http://www.jianshengkun.com";
         String s = HttpClientUtil.httpGet(baseUrl);
         Document document = Jsoup.parse(s);
