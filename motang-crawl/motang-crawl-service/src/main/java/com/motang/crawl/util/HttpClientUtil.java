@@ -135,7 +135,7 @@ public class HttpClientUtil {
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                 // 读取服务器返回过来的json字符串数据
                 HttpEntity entity = response.getEntity();
-                result = EntityUtils.toString(entity, "GBK");
+                result = EntityUtils.toString(entity, "UTF-8");
                 // 把json字符串转换成json对象
 
             } else {

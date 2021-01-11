@@ -28,9 +28,9 @@ public class CrawlSource implements Serializable{
      @TableField("source_name")
      private String sourceName;
 
-     @ApiModelProperty(name = "crawl_rule",value = "爬取规则（json串）")
-     @TableField("crawl_rule")
-     private String crawlRule;
+     @ApiModelProperty(name = "crawl_rule_id",value = "爬取规则Id")
+     @TableField("crawl_rule_id")
+     private String crawlRuleId;
 
      @ApiModelProperty(name = "source_status",value = "爬虫源状态，0：关闭，1：开启")
      @TableField("source_status")

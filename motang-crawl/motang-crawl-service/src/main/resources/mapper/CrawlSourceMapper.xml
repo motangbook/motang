@@ -5,7 +5,7 @@
     <resultMap id="CrawlSourceMap" type="com.motang.crawl.api.entity.CrawlSource">
               <id property="id" column="id"/>
              <result property="sourceName" column="source_name"/>
-             <result property="crawlRule" column="crawl_rule"/>
+             <result property="crawlRuleId" column="crawl_rule_id"/>
              <result property="sourceStatus" column="source_status"/>
              <result property="createTime" column="create_time"/>
              <result property="updateTime" column="update_time"/>
@@ -16,7 +16,7 @@
     <sql id="baseColumn">
                      id,
                      source_name,
-                     crawl_rule,
+                     crawl_rule_id,
                      source_status,
                      create_time,
                     update_time

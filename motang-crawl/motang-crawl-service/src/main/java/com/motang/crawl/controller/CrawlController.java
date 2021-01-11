@@ -44,73 +44,64 @@ public class CrawlController {
     }
 
     public static void main(String[] args) {
-        String baseUrl = "https://www.xiashuwu.com/";
+        String baseUrl = "http://www.uidzhx.com";
         String indexHtml = HttpClientUtil.httpGet(baseUrl);
         Document indexDocument = Jsoup.parse(indexHtml);
-        Elements maleCategoryElements = indexDocument.select("body > header > div.subMenuCon > div.subMenus > ul.male >li");
-        Elements femaleCategoryElements = indexDocument.select("body > header > div.subMenuCon > div.subMenus > ul.female >li");
+        Elements maleCategoryElements = indexDocument.select("body > div.wrap.header > div > a");
         for (Element maleCategoryElement : maleCategoryElements) {
-            String categoryHref = maleCategoryElement.select("a").attr("href");
-            if(StringUtils.isNotBlank(categoryHref)){
+                String categoryHref = maleCategoryElement.select("a").attr("href");
                 String categoryName = maleCategoryElement.select("a").text();
-                String categoryBookHtml = HttpClientUtil.httpGet(baseUrl+categoryHref);
-                Document categoryBookDocument = Jsoup.parse(categoryBookHtml);
-                // 分类下全部小说总页数
-                String totalCount = "";
-                String[] pageListStr = categoryBookDocument.select("#main > div.footer.pagination > span").text().split(" ");
-                for (String s : pageListStr) {
-                    if(s.startsWith("共")){
-                        totalCount = s.replace("共", "").replace("页", "");
-                    }
-                }
-                // 便利全部分页
-                for (int i = 1; i < Integer.parseInt(totalCount)+1; i++) {
-                    String bookPageHtml = HttpClientUtil.httpGet("https://www.xiashuwu.com/type/1_0_0_allvisit_" + i+".html");
-                    Document bookPageDocument = Jsoup.parse(bookPageHtml);
-                    // 当前页全部小说内容
-                    Elements categoryBookElement = bookPageDocument.select("#waterfall > div");
-                    for (Element bookElement : categoryBookElement) {
-                        // 小说详细信息
-                        String bookDetailHref = bookElement.select("div.title > h3 > a").attr("href");
-                        String bookName = bookElement.select("div.title > h3 > a").text();
-                        String author = bookElement.select("div.pic > div").text().replace("/","").replace("著","").trim();
-                        String bookIntroduction = bookElement.select("> div.intro").html();
-                        String loveCount = bookElement.select("div.num > a.like-num").html();
-                        String commentCount = bookElement.select("#div.num > a.cmt-num").html();
+              if(!StringUtils.equals("首页",categoryName)){
+                  String categoryBookHtml = HttpClientUtil.httpGet(baseUrl+categoryHref);
+                  Document categoryBookDocument = Jsoup.parse(categoryBookHtml);
+                  // 分类下全部小说总页数
+//                String totalCount = categoryBookDocument.select("#pagestats").text().replace("1/","");
+                  String totalCount = "2";
 
-                        // 小说具体内容
-                        String bookDetailHtml = HttpClientUtil.httpGet(baseUrl+bookDetailHref);
-                        Document bookDetailDocument = Jsoup.parse(bookDetailHtml);
-                        String collectCount = bookDetailDocument.select("#mainright > div.infonum > ul > li:nth-child(3)").text();
-                        String commendCount = bookDetailDocument.select("#mainright > div.infonum > ul > li:nth-child(4)").text();
-                        String tag = bookDetailDocument.select("#mainright > div.infonum > ul > li:nth-child(5)").text();
+                  // 便利全部分页
+                  for (int i = 1; i < Integer.parseInt(totalCount)+1; i++) {
+                      String  pageUrl = "http://www.uidzhx.com/soft/sort01/index_" + i + ".html";
+                      String bookPageHtml = HttpClientUtil.httpGet(pageUrl);
+                      Document bookPageDocument = Jsoup.parse(bookPageHtml);
+                      // 当前页全部小说内容
 
-                        Elements select = bookDetailDocument.select("#lastchapter > li");
-                        Element lastElement = select.get(select.size() - 1);
-                        String countStr = lastElement.select("a").attr("href");
-                        String contentCount="";
-                        String bokeId = "";
-                        String[] list = countStr.split("read_");
-                        for (String s : list) {
-                            if (s.contains(".html")) {
-                                contentCount = s.replace(".html", "");
-                            }else {
-                                bokeId = s;
-                            }
-                        }
-                        for (int j = 1; j < Integer.parseInt(contentCount)+1; j++) {
-                            String contentUrl = baseUrl + bokeId + "read_" + i + ".html";
-                            // 小说具体内容
-                            String contentDetailHtml = HttpClientUtil.httpGet(contentUrl);
-                            Document contentDetailDocument = Jsoup.parse(contentDetailHtml);
-                            String contentName = contentDetailDocument.select("body > section > div > article > div.title > h1 > a").text().replace(bookName,"");
-                            String contentUpdateTime = contentDetailDocument.select("body > section > div > article > div.title > div > span:nth-child(3)").text().replace("更新时间：","");
-                            String content = contentDetailDocument.select("#chaptercontent").html();
-                            System.out.println(content);
-                        }
-                    }
-                }
-            }
+                      Elements categoryBookElement = bookPageDocument.select("body > div:nth-child(5) > div.list > div.listBox > ul > li");
+                      for (Element bookElement : categoryBookElement) {
+                          // 小说详细信息
+                          String bookDetailHref = bookElement.select("a").attr("href");
+                          String bookDetailImage = bookElement.select("a").attr("src");
+                          String bookName = bookElement.select("a").text();
+                          String[] info = bookElement.select("div.s").text().split("大小");
+                          String author = info[0].replace("作者：", "");
+                          String bookIntroduction = bookElement.select("div.u").text();
+                          String loveCount ="100";
+                          String commentCount = "50";
+
+                          // 小说具体内容
+                          String bookDetailHtml = HttpClientUtil.httpGet(baseUrl+bookDetailHref);
+                          Document bookDetailDocument = Jsoup.parse(bookDetailHtml);
+                          String clickCount = bookDetailDocument.select("#body > div:nth-child(5) > div.show > div:nth-child(1) > div > div.detail_info > div > ul > li:nth-child(1)").text();
+                          String status = bookDetailDocument.select("body > div:nth-child(5) > div.show > div:nth-child(1) > div > div.detail_info > div > ul > li:nth-child(5)").text();
+                          String updateTime = bookDetailDocument.select("body > div:nth-child(5) > div.show > div:nth-child(1) > div > div.detail_info > div > ul > li:nth-child(4)").text();
+
+                          String chapterHref = bookDetailDocument.select("body > div:nth-child(5) > div.show > div:nth-child(4) > div.showDown > ul > li:nth-child(1) > a").attr("href");
+                          String allChapterUrl = baseUrl + chapterHref;
+                          String chapterHtml = HttpClientUtil.httpGet(allChapterUrl);
+                          Document chapterDocument = Jsoup.parse(chapterHtml);
+                          Elements chapterElements = chapterDocument.select("#info > div.pc_list > ul >li");
+                          for (Element chapterElement : chapterElements) {
+                              String chapterName = chapterElement.select("a").text();
+                              String contentHref = chapterElement.select("a").attr("href");
+                              String contentDetailHtml = HttpClientUtil.httpGet(baseUrl+chapterHref+contentHref);
+                              Document contentDetailDocument = Jsoup.parse(contentDetailHtml);
+                              String content = contentDetailDocument.select("#content1").html();
+                              System.out.println(content);
+                          }
+
+                      }
+                  }
+              }
+
         }
     }
 
