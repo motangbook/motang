@@ -10,6 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>book-crawl</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>motang-crawl-api</module>
+        <module>motang-crawl-service</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

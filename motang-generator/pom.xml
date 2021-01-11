@@ -30,6 +30,14 @@
                     <groupId>org.springframework.cloud</groupId>
                     <artifactId>spring-cloud-starter-openfeign</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-starter-oauth2</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-starter-security</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>

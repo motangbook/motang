@@ -1,6 +1,6 @@
 package ${basePackage}.${servicePackage};
 
-import ${basePackage}.${entityPackage}.${className};
+import ${basePackage}.${entityPackage}.I${className};
 
 import java.util.List;
 
@@ -9,6 +9,6 @@ import java.util.List;
 *  @author ${author}
 *  @Date ${.now}
 */
-public interface ${className}Service {
+public interface I${className}Service {
 
 }

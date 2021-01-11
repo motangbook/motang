@@ -1,18 +1,12 @@
 server:
-  port: 8889
+  port: 8884
   servlet:
-    context-path: /generator
+    context-path: /crawl
 
 
 spring:
   application:
-    name: book-generator
-
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 101.132.105.134:8848
-
+    name: motang-crawl
 
   redis:
     port: 6379
@@ -71,13 +65,24 @@ spring:
         login-password: admin
         enabled: true
 
+# 为了让feign获得token
+hystrix:
+  shareSecurityContext: true
+
+# 客户端的每一次请求都会去认证服务器校验token
+security:
+  oauth2:
+    resource:
+      id: ${spring.application.name}
+      user-info-uri: http://localhost:8882/auth/user
+
 logging:
   level:
-    com.motang.auth: debug
+    com.motang.crawl: debug
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/*.xml
-  type-aliases-package: com.motang.admin.entity
+  type-aliases-package: com.motang.crawl.api.entity
   configuration:
     map-underscore-to-camel-case: true
   global-config:
@@ -86,13 +91,7 @@ mybatis-plus:
 
 motang:
   swagger:
-    enable: true
-    basePackage: com.motang.service.controller
-    title: 墨唐书城API接口文档
-    description: 墨唐书城API接口文档-代码生成器接口
-    name: liuhu
-    url: https://github.com/motangbook/motang.git
-    email: 1649471814@qq.com
-    license:
-    licenseUrl:
-    version: 1.0
+    enable: false
+#  security:
+#    enable: true
+#    anonUrls: /captcha/**

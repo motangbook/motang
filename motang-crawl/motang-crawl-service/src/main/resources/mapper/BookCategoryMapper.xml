@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.motang.auth.mapper.BookCategoryMapper">
+    <!-- 基础返回结果集 -->
+    <resultMap id="BookCategoryMap" type="com.motang.crawl.api.entity.BookCategory">
+              <id property="id" column="id"/>
+             <result property="name" column="name"/>
+             <result property="workDirection" column="work_direction"/>
+             <result property="createTime" column="create_time"/>
+             <result property="updateTime" column="update_time"/>
+             <result property="sort" column="sort"/>
+    </resultMap>
+
+
+    <!-- 基础列 -->
+    <sql id="baseColumn">
+                     id,
+                     name,
+                     work_direction,
+                     create_time,
+                     update_time,
+                     sort
+    </sql>
+</mapper>
