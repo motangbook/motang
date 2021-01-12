@@ -7,10 +7,10 @@ import java.util.concurrent.TimeUnit;
 
 public class ThreadPoolUtil {
     /**核心线程数*/
-    private static int CORE_SIZE = 8;
+    private static int CORE_SIZE = 10;
 
     /**最大线程数 超过核心线程池数  进入拒绝策略*/
-    private static int MAX_POOL_SIZE = 12;
+    private static int MAX_POOL_SIZE = 15;
 
     /**超过 corePoolSize 线程数量的线程最大空闲时间*/
     private static  long KEEP_ALIVE_TIME = 2;

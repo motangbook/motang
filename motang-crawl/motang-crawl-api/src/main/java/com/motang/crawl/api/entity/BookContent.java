@@ -1,40 +1,40 @@
 package com.motang.crawl.api.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
-*  @Description msg 实体
+*  @Description 小说正文实体
 *  @author liuhu
-*  @Date 2021-1-9 22:49:39
+*  @Date 2021-1-12 14:55:20
 */
 @Data
-@ApiModel("小说分类实体类")
-@TableName("book_category")
+@ApiModel("小说正文")
+@TableName("book_content")
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class BookCategory implements Serializable{
+@NoArgsConstructor
+public class BookContent implements Serializable{
 
-     @ApiModelProperty(name = "id",value = "分类id")
+     @ApiModelProperty(name = "id",value = "正文Id")
      @TableId(value = "id", type = IdType.AUTO)
      private Long id;
 
-     @ApiModelProperty(name = "name",value = "分类名称")
-     @TableField("name")
-     private String name;
+     @ApiModelProperty(name = "chapter_id",value = "章节Id")
+     @TableField("chapter_id")
+     private Long chapterId;
 
-     @ApiModelProperty(name = "work_direction",value = "作品方向，1：男频，2：女频'")
-     @TableField("work_direction")
-     private Byte workDirection;
+     @ApiModelProperty(name = "content",value = "章节内容")
+     @TableField("content")
+     private String content;
 
      @ApiModelProperty(name = "create_time",value = "创建时间")
      @TableField(value = "create_time",fill = FieldFill.INSERT)
@@ -43,8 +43,4 @@ public class BookCategory implements Serializable{
      @ApiModelProperty(name = "update_time",value = "修改时间")
      @TableField(value = "update_time",fill = FieldFill.INSERT_UPDATE)
      private LocalDateTime updateTime;
-
-     @ApiModelProperty(name = "sort",value = "排序")
-     @TableField("sort")
-     private Byte sort;
 }

@@ -14,4 +14,12 @@ public interface ICrawlService {
      * @return void
      */
     void open(String sourceId, String status);
+    /**
+     * @Description 爬取小说源站保存小说分类
+     * @author liuhu
+     * @param sourceId
+     * @date 2021/1/12 10:25
+     * @return void
+     */
+    void saveCategory(String sourceId);
 }

@@ -40,7 +40,7 @@ public class GeneratorHelper {
      * @param swagger 是否swagger
      * @return java.lang.String
      */
-    private static String getFilePath(GeneratorConfig configure, String packagePath, String suffix, boolean xml, boolean swagger) {
+    private static String getFilePath(GeneratorConfig configure, String packagePath, String suffix, boolean xml, boolean swagger,boolean isInterface) {
         String filePath = "";
         if(xml){
             filePath = GeneratorConstant.TEMP_PATH + configure.getResourcesPath() +
@@ -48,6 +48,9 @@ public class GeneratorHelper {
         }else {
             filePath = GeneratorConstant.TEMP_PATH + configure.getJavaPath() +
                     packageConvertPath(configure.getBasePackage() + "." + packagePath);
+        }
+        if(isInterface){
+            filePath+="I";
         }
         if(swagger){
             filePath += suffix;
@@ -63,7 +66,7 @@ public class GeneratorHelper {
 
     public void generateEntityFile(List<Column> columns, GeneratorConfig configure) throws Exception {
         String suffix = GeneratorConstant.JAVA_FILE_SUFFIX;
-        String path = getFilePath(configure, configure.getEntityPackage(), suffix, false,false);
+        String path = getFilePath(configure, configure.getEntityPackage(), suffix, false,false,false);
         String templateName = GeneratorConstant.ENTITY_TEMPLATE;
         File entityFile = new File(path);
         JSONObject data = toJsonObject(configure);
@@ -85,7 +88,7 @@ public class GeneratorHelper {
 
     public void generateMapperFile(List<Column> columns, GeneratorConfig configure) throws Exception {
         String suffix = GeneratorConstant.MAPPER_FILE_SUFFIX;
-        String path = getFilePath(configure, configure.getMapperPackage(), suffix, false,false);
+        String path = getFilePath(configure, configure.getMapperPackage(), suffix, false,false,false);
         String templateName = GeneratorConstant.MAPPER_TEMPLATE;
         File mapperFile = new File(path);
         generateFileByTemplate(templateName, mapperFile, toJsonObject(configure));
@@ -93,7 +96,7 @@ public class GeneratorHelper {
 
     public void generateServiceFile(List<Column> columns, GeneratorConfig configure) throws Exception {
         String suffix = GeneratorConstant.SERVICE_FILE_SUFFIX;
-        String path = getFilePath(configure, configure.getServicePackage(), suffix, false,false);
+        String path = getFilePath(configure, configure.getServicePackage(), suffix, false,false,true);
         String templateName = GeneratorConstant.SERVICE_TEMPLATE;
         File serviceFile = new File(path);
         generateFileByTemplate(templateName, serviceFile, toJsonObject(configure));
@@ -101,7 +104,7 @@ public class GeneratorHelper {
 
     public void generateServiceImplFile(List<Column> columns, GeneratorConfig configure) throws Exception {
         String suffix = GeneratorConstant.SERVICEIMPL_FILE_SUFFIX;
-        String path = getFilePath(configure, configure.getServiceImplPackage(), suffix, false,false);
+        String path = getFilePath(configure, configure.getServiceImplPackage(), suffix, false,false,false);
         String templateName = GeneratorConstant.SERVICEIMPL_TEMPLATE;
         File serviceImplFile = new File(path);
         generateFileByTemplate(templateName, serviceImplFile, toJsonObject(configure));
@@ -109,7 +112,7 @@ public class GeneratorHelper {
 
     public void generateControllerFile(List<Column> columns, GeneratorConfig configure) throws Exception {
         String suffix = GeneratorConstant.CONTROLLER_FILE_SUFFIX;
-        String path = getFilePath(configure, configure.getControllerPackage(), suffix, false,false);
+        String path = getFilePath(configure, configure.getControllerPackage(), suffix, false,false,false);
         String templateName = GeneratorConstant.CONTROLLER_TEMPLATE;
         File controllerFile = new File(path);
         generateFileByTemplate(templateName, controllerFile, toJsonObject(configure));
@@ -117,7 +120,7 @@ public class GeneratorHelper {
 
     public void generateMapperXmlFile(List<Column> columns, GeneratorConfig configure) throws Exception {
         String suffix = GeneratorConstant.MAPPERXML_FILE_SUFFIX;
-        String path = getFilePath(configure, configure.getMapperXmlPackage(), suffix, true,false);
+        String path = getFilePath(configure, configure.getMapperXmlPackage(), suffix, true,false,false);
         String templateName = GeneratorConstant.MAPPERXML_TEMPLATE;
         File mapperXmlFile = new File(path);
         JSONObject data = toJsonObject(configure);
@@ -185,7 +188,7 @@ public class GeneratorHelper {
 
     public void generateSwaggerFile(List<Column> columns, GeneratorConfig configure) throws Exception {
         String suffix = GeneratorConstant.SWAGGER_FILE_SUFFIX;
-        String path = getFilePath(configure, configure.getSwaggerPackage(), suffix, false,true);
+        String path = getFilePath(configure, configure.getSwaggerPackage(), suffix, false,true,false);
         String templateName = GeneratorConstant.SWAGGER_TEMPLATE;
         File swaggerFile = new File(path);
         generateFileByTemplate(templateName, swaggerFile, toJsonObject(configure));
