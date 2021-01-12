@@ -2,6 +2,7 @@ package com.motang.crawl.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.motang.crawl.api.entity.Book;
+import io.lettuce.core.dynamic.annotation.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -12,4 +13,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BookMapper extends BaseMapper<Book> {
 
+    void updateLastIndex(@Param("bookId") Long bookId);
 }

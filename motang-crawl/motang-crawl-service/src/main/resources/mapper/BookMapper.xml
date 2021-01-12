@@ -51,4 +51,9 @@
                      update_time,
                      status
     </sql>
+
+    <update id="updateLastIndex">
+        update book set last_index_id= last_index_id +1 where id = #{bookId}
+
+   </update>
 </mapper>

@@ -17,6 +17,8 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -64,7 +66,9 @@ public class CrawlServiceImpl implements ICrawlService {
                 List<Long> threadIdList = new ArrayList<>();
                 for (int i = 1; i < 11; i++) {
                     int finalI = i;
+                    int finalI1 = i;
                     threadPoolExecutor.submit(() -> {
+                        Thread.currentThread().setName("小说爬虫线程【"+finalI1+"】");
                        //1. 将运行的线程ID放入集合  放入缓存
                         threadIdList.add(Thread.currentThread().getId());
                         // 2.解析 小说信息入库
@@ -202,21 +206,31 @@ public class CrawlServiceImpl implements ICrawlService {
         Document bookDetailDocument = Jsoup.parse(bookDetailHtml);
         String clickStr = bookDetailDocument.select("body > div:nth-child(5) > div.show > div:nth-child(1) > div > div.detail_info > div > ul > li:nth-child(1)").text().replace("点击次数：","");
         Integer clickCount = StringUtils.isNotBlank(clickStr)?Integer.parseInt(clickStr):0;
-        String updateTime = bookDetailDocument.select("body > div:nth-child(5) > div.show > div:nth-child(1) > div > div.detail_info > div > ul > li:nth-child(4)").text();
+        String updateTime = bookDetailDocument.select("body > div:nth-child(5) > div.show > div:nth-child(1) > div > div.detail_info > div > ul > li:nth-child(4)").text().replace("更新日期：","");
+        LocalDateTime dateTime = LocalDateTime.parse(updateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         String chapterHref = bookDetailDocument.select("body > div:nth-child(5) > div.show > div:nth-child(4) > div.showDown > ul > li:nth-child(1) > a").attr("href");
-
-        Book book = Book.builder().authorId(authorId).name(bookName)
-                .categoryId(categoryId).bookIntroduction(bookIntroduction)
-                .workDirection((byte) 1)
-                .clickCount(clickCount)
-                .level(level)
-                .subscribeCount(1000L)
-                .commentCount(500L)
-                .build();
-
-      bookService.insertBook(book);
+        log.info("当前线程"+Thread.currentThread().getName()+": 正在入库小说【{}】",bookName);
+        // 判断当前小说是否入库  且是最新章节
+        Book selectByName = bookService.selectByName(bookName);
+        Long bookId;
+        if(null != selectByName){
+            bookId = selectByName.getId();
+        }else {
+            Book book = Book.builder().authorId(authorId).name(bookName)
+                    .categoryId(categoryId).bookIntroduction(bookIntroduction)
+                    .workDirection((byte) 1)
+                    .clickCount(clickCount)
+                    .level(level)
+                    .lastUpdateTime(dateTime)
+                    .subscribeCount(1000L)
+                    .commentCount(500L)
+                    .lastIndexId(12)
+                    .build();
+            bookService.insertBook(book);
+            bookId = book.getId();
+        }
       // 保存章节信息
-      saveChapterInfo(baseUrl,chapterHref,book.getId());
+      saveChapterInfo(baseUrl,chapterHref,bookId);
     }
 
 
@@ -235,26 +249,41 @@ public class CrawlServiceImpl implements ICrawlService {
         String chapterHtml = HttpClientUtil.httpGet(allChapterUrl);
         Document chapterDocument = Jsoup.parse(chapterHtml);
         Elements chapterElements = chapterDocument.select("#info > div.pc_list > ul >li");
-        for (Element chapterElement : chapterElements) {
-            String chapterName = chapterElement.select("a").text();
-            String contentHref = chapterElement.select("a").attr("href");
-            BookChapter chapter = BookChapter.builder()
-                    .bookId(bookId)
-                    .name(chapterName)
-                    .build();
-            bookChapterService.insertChapter(chapter);
-            String contentDetailHtml = HttpClientUtil.httpGet(baseUrl + chapterHref + contentHref);
-            Document contentDetailDocument = Jsoup.parse(contentDetailHtml);
-            String content = contentDetailDocument.select("#content1").html();
-            BookContent bookContent = BookContent.builder().chapterId(chapter.getId()).content(content).build();
-            bookContentService.insertContent(bookContent);
-            try {
-                Thread.sleep(60000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        // 前11个是最新章节 从第12个开始
+        int startIndex;
+        Book book = bookService.selectById(bookId);
+        if(null != book && null != book.getLastIndexId()){
+            startIndex =  book.getLastIndexId();
+        }else {
+            startIndex = 12;
+        }
+        for (int i = 0; i < chapterElements.size(); i++) {
+            if(i>=startIndex){
+                String chapterName = chapterElements.get(i).select("a").text();
+                String contentHref = chapterElements.get(i).select("a").attr("href");
+                BookChapter chapter = BookChapter.builder()
+                        .bookId(bookId)
+                        .name(chapterName)
+                        .build();
+                bookChapterService.insertChapter(chapter);
+                String contentDetailHtml = HttpClientUtil.httpGet(baseUrl + chapterHref + contentHref);
+                Document contentDetailDocument = Jsoup.parse(contentDetailHtml);
+
+                String content = contentDetailDocument.select("#content1").html();
+                BookContent bookContent = BookContent.builder().chapterId(chapter.getId()).content(content).build();
+                bookContentService.insertContent(bookContent);
+
+                // 小说最新章节加1
+                bookService.updateLastIndex(bookId);
+
+                try {
+                    Thread.sleep(60000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
+      }
 
-    }
 
 }

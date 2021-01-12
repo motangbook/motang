@@ -35,7 +35,7 @@ public class CrawlController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "sourceId",value = "爬虫来源Id")
     })
-    @GetMapping("  /{sourceId}")
+    @GetMapping("saveCategory/{sourceId}")
     public ResponseEntity<Void> saveCategory(@PathVariable("sourceId")String sourceId){
         crawlService.saveCategory(sourceId);
         return ResponseEntity.ok().build();
@@ -100,6 +100,7 @@ public class CrawlController {
                           String allChapterUrl = baseUrl + chapterHref;
                           String chapterHtml = HttpClientUtil.httpGet(allChapterUrl);
                           Document chapterDocument = Jsoup.parse(chapterHtml);
+
                           Elements chapterElements = chapterDocument.select("#info > div.pc_list > ul >li");
                           for (Element chapterElement : chapterElements) {
                               String chapterName = chapterElement.select("a").text();

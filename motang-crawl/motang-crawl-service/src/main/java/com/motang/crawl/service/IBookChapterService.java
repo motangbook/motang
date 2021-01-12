@@ -16,4 +16,5 @@ public interface IBookChapterService {
      * @return void
      */
     void insertChapter(BookChapter chapter);
+
 }

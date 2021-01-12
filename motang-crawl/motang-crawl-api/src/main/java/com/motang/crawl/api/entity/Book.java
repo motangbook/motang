@@ -88,7 +88,7 @@ public class Book implements Serializable{
 
      @ApiModelProperty(name = "last_index_id",value = "最新目录ID")
      @TableField("last_index_id")
-     private Long lastIndexId;
+     private Integer lastIndexId;
 
      @ApiModelProperty(name = "last_index_name",value = "最新目录名")
      @TableField("last_index_name")
